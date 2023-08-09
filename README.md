@@ -1,7 +1,7 @@
 ![Static Badge](https://img.shields.io/badge/Ballerina-2201.7.1-1ab3ab)
 <br/>
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/zero-hack-org/svg_parser)
-![GitHub repo size](https://img.shields.io/github/repo-size/zero-hack-org/svg_parser)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/zero-hack-org/svg-parser)
+![GitHub repo size](https://img.shields.io/github/repo-size/zero-hack-org/svg-parser)
 <br/>
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 <br/>
