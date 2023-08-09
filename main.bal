@@ -1,4 +1,4 @@
-import custom_svg.github;
+import svg_parser.github;
 import ballerina/http;
 import ballerina/graphql;
 import ballerina/os;

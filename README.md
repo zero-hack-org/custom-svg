@@ -1,13 +1,13 @@
 ![Static Badge](https://img.shields.io/badge/Ballerina-2201.7.1-1ab3ab)
 <br/>
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/zero-hack-org/custom-svg)
-![GitHub repo size](https://img.shields.io/github/repo-size/zero-hack-org/custom-svg)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/zero-hack-org/svg_parser)
+![GitHub repo size](https://img.shields.io/github/repo-size/zero-hack-org/svg_parser)
 <br/>
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 <br/>
 ![Twitter Follow](https://img.shields.io/twitter/follow/y_morimoto_dev?style=social)
-  
-# Custom-SVG
+
+# SVG Parser
 
 SVG Parser for Ballerina Lang Tutorial
 
