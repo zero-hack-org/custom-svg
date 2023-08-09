@@ -1,0 +1,3 @@
+[container.image]
+name="custom_svg"
+tag="latest"

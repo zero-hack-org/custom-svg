@@ -1,0 +1,6 @@
+[custom_svg]
+port=8080
+
+[custom_svg.github]
+githubUsername="yuya-morimoto"
+githubPersonalAccessToken="token"
