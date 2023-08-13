@@ -7,16 +7,11 @@
 <br/>
 ![Twitter Follow](https://img.shields.io/twitter/follow/y_morimoto_dev?style=social)
 
-# SVG Parser
+## svg-parser
 
-SVG Parser for Ballerina Lang Tutorial
+Ballerina Lang SVG Parser
 
-# Requirement
-
-- Ballerina: https://ballerina.io/downloads/
-- Docker
-
-# SetUp & StartUp
+### Usage
 
 1. Rename GitHub Username
    1. open `Config.toml`
@@ -30,11 +25,10 @@ SVG Parser for Ballerina Lang Tutorial
 4. Test Request
    1. `curl -i http://localhost:8080`
 
-# Author
+### Useful links
 
-- 作成者: yuya-morimoto
-- E-mail: yuya-morimoto@zero-hack.jp
+- Discuss code changes of the Ballerina project via [yuya-morimoto@zero-hack.jp](yuya-morimoto@zero-hack.jp).
 
-# Lisence
+### License
 
-This project is licensed under the MIT License, see the [LICENSE](./LICENSE) file for details
+This project is licensed under the Apache-2.0 License, see the [LICENSE](./LICENSE) file for details
