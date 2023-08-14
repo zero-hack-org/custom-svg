@@ -17,4 +17,6 @@ jobs:
       - name: Upload coverage reports to Codecov 📄
         uses: codecov/codecov-action@v3
         with:
-          files: ./target/report/github/coverage-report.xml
+          files: ./target/report/svg_parser/coverage-report.xml
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
