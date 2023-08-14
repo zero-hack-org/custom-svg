@@ -18,5 +18,3 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           files: ./target/report/github/coverage-report.xml
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
