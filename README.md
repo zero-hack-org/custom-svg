@@ -13,17 +13,30 @@ Ballerina Lang SVG Parser
 
 ### Usage
 
-1. Rename GitHub Username
-   1. open `Config.toml`
-   2. `githubUsername="yuya-morimoto"` -> `githubUsername="your-name"`
-2. Create and Set GitHub Personal Access Token
-   1. create from [GitHub Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#about-personal-access-tokens)
-   2. open `Config.toml`
-   3. `githubPersonalAccessToken="token"` -> `githubPersonalAccessToken="your-token(ex:ghp_xxxxx)"`
+1. Generate Config.toml
+
+   ```bash
+   cp BaseConfig.toml Config.toml
+   ```
+
+2. Custom Config.toml
+   | Argument name | Description |
+   | ------------------ | ---------------------------------------------------- |
+   | svg_parser.port | Custom port |
+   | [zerohack.github](https://central.ballerina.io/zerohack/github).githubUsername | Your github username |
+   | [zerohack.github](https://central.ballerina.io/zerohack/github).githubPersonalAccessToken | Your [github personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#about-personal-access-tokens) |
+
 3. Start up application
-   1. `bal run`
-4. Test Request
-   1. `curl -i http://localhost:8080`
+
+   ```bash
+   bal run
+   ```
+
+4. Demo Request
+
+   ```bash
+   curl -i http://localhost:8080
+   ```
 
 ### Useful links
 
