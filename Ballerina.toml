@@ -6,3 +6,8 @@ distribution = "2201.7.1"
 
 [build-options]
 observabilityIncluded = true
+
+[[dependency]]
+org = "zerohack"
+name = "github"
+version = "0.5.0"
