@@ -1,0 +1,6 @@
+[svg_parser]
+port=8080
+
+[zerohack.github]
+githubUsername="github-username"
+githubPersonalAccessToken="github-personal-access-token"

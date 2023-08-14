@@ -2,3 +2,4 @@ target
 generated
 *.env
 Dependencies.toml
+Config.toml
