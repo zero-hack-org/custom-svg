@@ -5,7 +5,7 @@
 <br/>
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 <br/>
-[![codecov](https://codecov.io/gh/zero-hack-org/module-zerohack-github/branch/main/graph/badge.svg?token=263B3XC36E)](https://codecov.io/gh/zero-hack-org/module-zerohack-github)
+[![codecov](https://codecov.io/gh/zero-hack-org/svg-parser/branch/main/graph/badge.svg?token=83AFHJOCY2)](https://codecov.io/gh/zero-hack-org/svg-parser)
 <br/>
 ![Twitter Follow](https://img.shields.io/twitter/follow/y_morimoto_dev?style=social)
 
