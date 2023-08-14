@@ -1,6 +1,0 @@
-[svg_parser]
-port=8080
-
-[svg_parser.github]
-githubUsername="yuya-morimoto"
-githubPersonalAccessToken="token"
