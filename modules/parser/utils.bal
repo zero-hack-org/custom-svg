@@ -1,5 +1,16 @@
+import zerohack/github;
 import ballerina/io;
 
+# Generate parent svg tag
+#
+# ```ballerina
+# generateParentSvg()
+# ⇒ xml `<svg width="770.0" height="126.0" xmlns="http://www.w3.org/2000/svg"></svg>`;
+# ```
+#
+# + pixelSize - pixel size
+# + pitch - pitch size
+# + return - svg tag
 function generateParentSvg(int pixelSize = 10, float pitch = 2.0) returns xml:Element|error {
     // 1week(7day) * 53 = 371
     // IF column is 52, 1week(7day) * 52 = 364 < 365
@@ -7,15 +18,16 @@ function generateParentSvg(int pixelSize = 10, float pitch = 2.0) returns xml:El
     final int row = 7;
     final float onePixelSize = <float>pixelSize + pitch * 2.0;
     final float margin = onePixelSize * 2;
+    // Value for adjust
+    final float adjust = pitch * 2.0;
 
     // calc width, height
-    final float width = onePixelSize * column + margin;
-    final float height = onePixelSize * row + margin;
+    final float width = (onePixelSize * column + margin) - adjust;
+    final float height = (onePixelSize * row + margin) - adjust;
 
     final string svg = string `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg"></svg>`;
 
-    final io:StringReader reader = new (svg);
-    final xml result = check reader.readXml() ?: xml ``;
+    final xml result = check stringToXml(svg);
 
     return <xml:Element>result;
 }
@@ -99,9 +111,7 @@ function generateColorStyle(ContributionLevelColor levelColor, int pixelSize = 1
         mergeStyleString += style;
     }
 
-    final io:StringReader reader = new (mergeStyleString);
-    final xml result = check reader.readXml() ?: xml ``;
-
+    final xml result = check stringToXml(mergeStyleString);
     return result;
 }
 
@@ -117,11 +127,41 @@ function generateColorStyle(ContributionLevelColor levelColor, int pixelSize = 1
 # + strokeColor - rect stroke color
 # + return - rect style
 function generateBackRectStyle(string strokeColor) returns xml|error {
-    final string backRectStyle = string `<rect width="100%" height="100%" stroke="${strokeColor}" stroke-width="2px" fill="#00000000"></rect>`;
+    final string backRectStyle = string `<rect width="100%" height="100%" stroke="${strokeColor}" stroke-width="4px" fill="#00000000"></rect>`;
 
-    final io:StringReader reader = new (backRectStyle);
-    final xml result = check reader.readXml() ?: xml ``;
-
+    final xml result = check stringToXml(backRectStyle);
     return result;
 
+}
+
+function generatePixel(github:ContributionsResponse contributions, int pixelSize = 10, float pitch = 2.0) returns xml|error {
+    // generate base tag
+    final float onePixel = <float>pixelSize + pitch * 2.0;
+    final string startParentSvg = string `<g transform="translate(${onePixel}, ${onePixel})">`;
+    final string endParentSvg = "</g>";
+
+    // generate pixel tag
+    string pixelsString = startParentSvg;
+    contributions.data.user.contributionsCollection.contributionCalendar.weeks.enumerate().forEach(function([int, github:Weeks] week) {
+        final float positionX = week[0] * onePixel;
+        week[1].contributionDays.enumerate().forEach(function([int, github:ContributionDays] day) {
+            final float positionY = day[0] * onePixel;
+            final string pixelString = string `
+                <rect class="pixel ${day[1].contributionLevel}" x="${positionX}" y="${positionY}" data-date="${day[1].date}" data-count="${day[1].contributionCount}">
+                    <title>${day[1].date}: ${day[1].contributionCount}</title>
+                </rect>
+            `;
+            pixelsString += pixelString;
+
+        });
+    });
+    pixelsString += endParentSvg;
+    final xml pixelsXml = check stringToXml(pixelsString);
+    return pixelsXml;
+}
+
+function stringToXml(string xmlString) returns xml|error {
+    final io:StringReader reader = new (xmlString);
+    final xml result = check reader.readXml() ?: xml ``;
+    return result;
 }

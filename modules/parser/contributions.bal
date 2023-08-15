@@ -1,3 +1,4 @@
+import zerohack/github;
 
 # No contributions occurred.
 configurable string noneQuaritleColor = "#ebedf0";
@@ -9,3 +10,25 @@ configurable string secondQuaritleColor = "#40c463";
 configurable string thirdQuaritleColor = "#30a14e";
 # Highest 25% of days of contributions. More contributions than the third quartile.
 configurable string fourthQuaritleColor = "#216e39";
+
+configurable string strokeColor = "#affeca";
+
+public function generateContributions(github:ContributionsResponse contributions) returns error|xml:Element {
+    final xml:Element parent = check generateParentSvg();
+
+    final xml colorStyle = check generateColorStyle({
+        NONE: noneQuaritleColor,
+        FIRST_QUARTILE: firstQuaritleColor,
+        SECOND_QUARTILE: secondQuaritleColor,
+        THIRD_QUARTILE: thirdQuaritleColor,
+        FOURTH_QUARTILE: fourthQuaritleColor
+    });
+
+    final xml rect = check generateBackRectStyle(strokeColor);
+
+    final xml pixels = check generatePixel(contributions);
+
+    parent.setChildren(colorStyle + rect + pixels);
+
+    return parent;
+}
