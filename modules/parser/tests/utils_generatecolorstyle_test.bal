@@ -11,7 +11,7 @@ function testGenerateColorStyle() returns error? {
     });
 
     final xml expected = xml `<style>
-            #github-contributions .pixel {
+            .pixel {
                 width: 10px;
                 height: 10px;
                 rx: 2px;
@@ -20,23 +20,23 @@ function testGenerateColorStyle() returns error? {
                 stroke-width: 0px;
             }
         
-            #github-contributions .NONE {
+            .NONE {
                 fill: #333333;
             }
         
-            #github-contributions .FIRST_QUARTILE {
+            .FIRST_QUARTILE {
                 fill: #555555;
             }
         
-            #github-contributions .SECOND_QUARTILE {
+            .SECOND_QUARTILE {
                 fill: #777777;
             }
         
-            #github-contributions .THIRD_QUARTILE {
+            .THIRD_QUARTILE {
                 fill: #999999;
             }
         
-            #github-contributions .FOURTH_QUARTILE {
+            .FOURTH_QUARTILE {
                 fill: #BBBBBB;
             }
         </style>`;
