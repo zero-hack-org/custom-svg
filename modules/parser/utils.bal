@@ -168,6 +168,11 @@ function generatePixel(github:ContributionsResponse contributions, int pixelSize
 
 # Convert string to xml
 #
+# ```ballerina
+# strintToXml("<svg></svg>")
+# ⇒ xml `<svg></svg>`
+# ```
+#
 # + xmlString - xml format string
 # + return - xml
 function stringToXml(string xmlString) returns xml|error {
