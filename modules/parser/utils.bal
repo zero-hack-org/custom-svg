@@ -3,7 +3,7 @@ import ballerina/io;
 # Generate color style
 #
 # ```ballerina
-# xml result = generateColorStyle({
+# generateColorStyle({
 #   NONE: "#333333",
 #   FIRST_QUARTILE: "#555555",
 #   SECOND_QUARTILE: "#777777",
@@ -45,14 +45,14 @@ import ballerina/io;
 #
 # + levelColor - contributions level color config
 # + return - xml style tag
-function generateColorStyle(ContributionLevelColor levelColor) returns xml|error {
+function generateColorStyle(ContributionLevelColor levelColor, int pixelSize = 10) returns xml|error {
     // Constant style
     final string startTag = "<style>";
     final string endTag = "</style>";
     final string pixelStyle = string `
             #github-contributions .pixel {
-                width: 10px;
-                height: 10px;
+                width: ${pixelSize}px;
+                height: ${pixelSize}px;
                 rx: 2px;
                 ry: 2px;
                 stroke: rgba(0, 0, 0, 0);
@@ -82,4 +82,39 @@ function generateColorStyle(ContributionLevelColor levelColor) returns xml|error
     final xml result = check reader.readXml() ?: xml ``;
 
     return result;
+}
+
+# Generate background rect style
+#
+# ```:ballerina
+# generateBackRectStyle(
+#     "#ffff00"
+# );
+# ⇒ xml `<rect width="770.0" height="126.0" stroke="#ffff00" stroke-width="2px" fill="#00000000"></rect>`;  
+# ```
+#
+# + strokeColor - rect stroke color
+# + pixelSize - pixel size for calc rect size
+# + pitch - pixel pitch for calc rect size
+# + return - rect style
+function generateBackRectStyle(string strokeColor, int pixelSize = 10, float pitch = 2.0) returns xml|error {
+
+    // 1week(7day) * 53 = 371
+    // IF column is 52, 1week(7day) * 52 = 364 < 365
+    final int column = 53;
+    final int row = 7;
+    final float onePixelSize = <float>pixelSize + pitch * 2.0;
+    final float margin = onePixelSize * 2;
+
+    // calc width, height
+    final float width = onePixelSize * column + margin;
+    final float height = onePixelSize * row + margin;
+
+    final string backRectStyle = string `<rect width="${width}" height="${height}" stroke="${strokeColor}" stroke-width="2px" fill="#00000000"></rect>`;
+
+    final io:StringReader reader = new (backRectStyle);
+    final xml result = check reader.readXml() ?: xml ``;
+
+    return result;
+
 }
