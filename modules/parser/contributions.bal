@@ -13,6 +13,10 @@ configurable string fourthQuaritleColor = "#216e39";
 
 configurable string strokeColor = "#affeca";
 
+# Generate contributions xml
+#
+# + contributions - contributions data
+# + return - contributions xml
 public function generateContributions(github:ContributionsResponse contributions) returns error|xml:Element {
     final xml:Element parent = check generateParentSvg();
 

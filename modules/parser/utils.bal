@@ -134,6 +134,12 @@ function generateBackRectStyle(string strokeColor) returns xml|error {
 
 }
 
+# Generate pixcels svg from contributions data
+#
+# + contributions - contributions data
+# + pixelSize - pixel size
+# + pitch - pitch
+# + return - pixels svg xml
 function generatePixel(github:ContributionsResponse contributions, int pixelSize = 10, float pitch = 2.0) returns xml|error {
     // generate base tag
     final float onePixel = <float>pixelSize + pitch * 2.0;
@@ -160,6 +166,10 @@ function generatePixel(github:ContributionsResponse contributions, int pixelSize
     return pixelsXml;
 }
 
+# Convert string to xml
+#
+# + xmlString - xml format string
+# + return - xml
 function stringToXml(string xmlString) returns xml|error {
     final io:StringReader reader = new (xmlString);
     final xml result = check reader.readXml() ?: xml ``;
