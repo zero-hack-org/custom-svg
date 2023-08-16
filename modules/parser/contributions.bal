@@ -17,7 +17,7 @@ configurable string strokeColor = "#affeca";
 #
 # + contributions - contributions data
 # + return - contributions xml
-public function generateContributions(github:ContributionsResponse contributions) returns error|xml:Element {
+public isolated function generateContributions(github:ContributionsResponse contributions) returns error|xml:Element {
     final xml:Element parent = check generateParentSvg();
 
     final xml colorStyle = check generateColorStyle({
