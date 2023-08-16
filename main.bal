@@ -5,7 +5,7 @@ import ballerina/http;
 configurable int port = 8080;
 
 service / on new http:Listener(port) {
-    resource function get [string username](http:Caller caller, http:Request request) returns error? {
+    resource function get contributions(http:Caller caller, http:Request request) returns error? {
         http:Response response = new;
         final github:GraphQlClient githubClient = new;
         github:ContributionsResponse contributions = check githubClient.getContributions();

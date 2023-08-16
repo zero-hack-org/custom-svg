@@ -11,7 +11,7 @@ import ballerina/io;
 # + pixelSize - pixel size
 # + pitch - pitch size
 # + return - svg tag
-function generateParentSvg(int pixelSize = 10, float pitch = 2.0) returns xml:Element|error {
+isolated function generateParentSvg(int pixelSize = 10, float pitch = 2.0) returns xml:Element|error {
     // 1week(7day) * 53 = 371
     // IF column is 52, 1week(7day) * 52 = 364 < 365
     final int column = 53;
@@ -78,7 +78,7 @@ function generateParentSvg(int pixelSize = 10, float pitch = 2.0) returns xml:El
 # + levelColor - contributions level color config
 # + pixelSize - pixel size
 # + return - xml style tag
-function generateColorStyle(ContributionLevelColor levelColor, int pixelSize = 10) returns xml|error {
+isolated function generateColorStyle(ContributionLevelColor levelColor, int pixelSize = 10) returns xml|error {
     // Constant style
     final string startTag = "<style>";
     final string endTag = "</style>";
@@ -126,7 +126,7 @@ function generateColorStyle(ContributionLevelColor levelColor, int pixelSize = 1
 #
 # + strokeColor - rect stroke color
 # + return - rect style
-function generateBackRectStyle(string strokeColor) returns xml|error {
+isolated function generateBackRectStyle(string strokeColor) returns xml|error {
     final string backRectStyle = string `<rect width="100%" height="100%" stroke="${strokeColor}" stroke-width="4px" fill="#00000000"></rect>`;
 
     final xml result = check stringToXml(backRectStyle);
@@ -140,7 +140,7 @@ function generateBackRectStyle(string strokeColor) returns xml|error {
 # + pixelSize - pixel size
 # + pitch - pitch
 # + return - pixels svg xml
-function generatePixel(github:ContributionsResponse contributions, int pixelSize = 10, float pitch = 2.0) returns xml|error {
+isolated function generatePixel(github:ContributionsResponse contributions, int pixelSize = 10, float pitch = 2.0) returns xml|error {
     // generate base tag
     final float onePixel = <float>pixelSize + pitch * 2.0;
     final string startParentSvg = string `<g transform="translate(${onePixel}, ${onePixel})">`;
@@ -148,9 +148,10 @@ function generatePixel(github:ContributionsResponse contributions, int pixelSize
 
     // generate pixel tag
     string pixelsString = startParentSvg;
-    contributions.data.user.contributionsCollection.contributionCalendar.weeks.enumerate().forEach(function([int, github:Weeks] week) {
+
+    foreach [int, github:Weeks] week in contributions.data.user.contributionsCollection.contributionCalendar.weeks.enumerate() {
         final float positionX = week[0] * onePixel;
-        week[1].contributionDays.enumerate().forEach(function([int, github:ContributionDays] day) {
+        foreach [int, github:ContributionDays] day in week[1].contributionDays.enumerate() {
             final float positionY = day[0] * onePixel;
             final string pixelString = string `
                 <rect class="pixel ${day[1].contributionLevel}" x="${positionX}" y="${positionY}" data-date="${day[1].date}" data-count="${day[1].contributionCount}">
@@ -158,9 +159,10 @@ function generatePixel(github:ContributionsResponse contributions, int pixelSize
                 </rect>
             `;
             pixelsString += pixelString;
+        }
 
-        });
-    });
+    }
+
     pixelsString += endParentSvg;
     final xml pixelsXml = check stringToXml(pixelsString);
     return pixelsXml;
@@ -175,7 +177,7 @@ function generatePixel(github:ContributionsResponse contributions, int pixelSize
 #
 # + xmlString - xml format string
 # + return - xml
-function stringToXml(string xmlString) returns xml|error {
+isolated function stringToXml(string xmlString) returns xml|error {
     final io:StringReader reader = new (xmlString);
     final xml result = check reader.readXml() ?: xml ``;
     return result;
