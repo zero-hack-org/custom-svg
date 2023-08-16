@@ -1,17 +1,19 @@
 import zerohack/github;
+import svg_parser.parser;
 import ballerina/http;
 
 configurable int port = 8080;
 
 service / on new http:Listener(port) {
-    resource function get [string username](http:Caller caller, http:Request request) returns error? {
+    resource function get contributions(http:Request request) returns error|http:Response {
         http:Response response = new;
         final github:GraphQlClient githubClient = new;
-        github:ContributionsResponse _ = check githubClient.getContributions();
+        github:ContributionsResponse contributions = check githubClient.getContributions();
 
-        string svgData = "<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><circle cx='50' cy='50' r='40' stroke='black' stroke-width='3' fill='red' /></svg>";
-        response.setPayload(svgData);
+        final xml:Element result = check parser:generateContributions(contributions);
+
+        response.setPayload(result);
         response.setHeader("Content-Type", "image/svg+xml");
-        check caller->respond(response);
+        return response;
     }
 }
