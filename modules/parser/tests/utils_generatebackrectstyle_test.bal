@@ -6,7 +6,7 @@ function testGenerateBackRectStyle() returns error? {
         "#ffff00"
     );
 
-    final xml expecte = xml `<rect width="100%" height="100%" stroke="#ffff00" stroke-width="2px" fill="#00000000"></rect>`;
+    final xml expecte = xml `<rect width="100%" height="100%" stroke="#ffff00" stroke-width="4px" fill="#00000000"></rect>`;
 
     test:assertEquals(result.toJson(), expecte.toJson());
 }
