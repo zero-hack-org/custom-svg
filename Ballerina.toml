@@ -1,7 +1,7 @@
 [package]
 org = "zero_hack"
 name = "svg_parser"
-version = "0.3.0"
+version = "0.4.0"
 distribution = "2201.7.1"
 
 [build-options]
@@ -10,4 +10,4 @@ observabilityIncluded = true
 [[dependency]]
 org = "zerohack"
 name = "github"
-version = "0.5.0"
+version = "0.7.0"

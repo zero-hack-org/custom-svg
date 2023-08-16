@@ -21,7 +21,7 @@ Ballerina Lang SVG Parser
    cp BaseConfig.toml Config.toml
    ```
 
-2. Custom Config.toml
+2. Custom Config.toml (./.env is also possible)
    | Argument name | Description |
    | ------------------ | ---------------------------------------------------- |
    | svg_parser.port | Custom port |
