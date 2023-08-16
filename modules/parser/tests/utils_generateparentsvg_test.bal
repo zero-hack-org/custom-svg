@@ -4,7 +4,7 @@ import ballerina/test;
 function testGenerateParentSvg() returns error? {
     final xml result = check generateParentSvg();
 
-    final xml expecte = xml `<svg width="770.0" height="126.0" xmlns="http://www.w3.org/2000/svg"></svg>`;
+    final xml expecte = xml `<svg width="766.0" height="122.0" xmlns="http://www.w3.org/2000/svg"></svg>`;
 
     test:assertEquals(result.toJson(), expecte.toJson());
 }
