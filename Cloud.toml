@@ -1,4 +1,4 @@
 [container.image]
 repository="zerohack"
 name="svg_parser"
-tag="0.5.0"
+tag="0.5.2"
