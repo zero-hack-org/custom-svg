@@ -37,5 +37,6 @@ jobs:
 
       - name: Push Image ✨
         run: |
-          docker tag svg_parser:latest public.ecr.aws/${{ secrets.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
-          docker push public.ecr.aws/${{ secrets.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
+          echo ${{ steps.login-ecr-public.outputs.registry }}
+          docker tag svg_parser:latest ${{ steps.login-ecr-public.outputs.registry }}/${{ secrets.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
+          docker push ${{ steps.login-ecr-public.outputs.registry }}/${{ secrets.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
