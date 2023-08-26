@@ -24,11 +24,11 @@ jobs:
         aws-region: ap-northeast-1
 
     - name: Login to Amazon ECR Public 🏠
-        id: login-ecr-public
-        uses: aws-actions/amazon-ecr-login@v1
-        with:
-          mask-password: 'true'
-          registry-type: public
+      id: login-ecr-public
+      uses: aws-actions/amazon-ecr-login@v1
+      with:
+        mask-password: 'true'
+        registry-type: public
 
     - name: Ballerina Build 🔧
         uses: ballerina-platform/ballerina-action/@2201.7.1
