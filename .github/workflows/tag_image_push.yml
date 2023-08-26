@@ -27,13 +27,13 @@ jobs:
       id: login-ecr-public
       uses: aws-actions/amazon-ecr-login@v1
       with:
-        mask-password: 'true'
+        mask-password: "true"
         registry-type: public
 
     - name: Ballerina Build 🔧
-        uses: ballerina-platform/ballerina-action/@2201.7.1
-        with:
-          args: build --cloud=docker
+      uses: ballerina-platform/ballerina-action/@2201.7.1
+      with:
+        args: build --cloud=docker
 
     - name: Push Image ✨
-        run: docker push ${{ secrets.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
+      run: docker push ${{ secrets.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
