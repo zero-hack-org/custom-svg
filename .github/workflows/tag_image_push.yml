@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
   steps:
+    - name: Get tag name 🏷
+      run: echo "TAG_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
     - name: Check out ✊
       uses: actions/checkout@v3
 
@@ -20,7 +23,17 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_CONTAINER }}
         aws-region: ap-northeast-1
 
-    - name: Ballerina Build and Push ✨
+    - name: Login to Amazon ECR Public 🏠
+        id: login-ecr-public
+        uses: aws-actions/amazon-ecr-login@v1
+        with:
+          mask-password: 'true'
+          registry-type: public
+
+    - name: Ballerina Build 🔧
         uses: ballerina-platform/ballerina-action/@2201.7.1
         with:
           args: build --cloud=docker
+
+    - name: Push Image ✨
+        run: docker push ${{ secrets.AWS_ECR_ZEROHACK_CONTAINER_ID }}/svg_parser:${{ env.TAG_NAME }}
