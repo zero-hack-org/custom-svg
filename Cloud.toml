@@ -1,3 +1,4 @@
 [container.image]
+repository="zerohack"
 name="svg_parser"
-tag="latest"
+tag="0.5.0"
