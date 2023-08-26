@@ -1,0 +1,26 @@
+name: Push image tag
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  push_image:
+    runs-on: ubuntu-latest
+
+  steps:
+    - name: Check out ✊
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials 🔑
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_CONTAINER }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_CONTAINER }}
+        aws-region: ap-northeast-1
+
+    - name: Ballerina Build and Push ✨
+        uses: ballerina-platform/ballerina-action/@2201.7.1
+        with:
+          args: build --cloud=docker
