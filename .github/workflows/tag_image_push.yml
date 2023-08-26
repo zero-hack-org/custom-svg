@@ -36,4 +36,4 @@ jobs:
           args: build --cloud=docker
 
       - name: Push Image ✨
-        run: docker push ${{ secrets.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
+        run: docker push public.ecr.aws/${{ secrets.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
