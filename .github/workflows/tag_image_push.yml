@@ -33,7 +33,7 @@ jobs:
       - name: Ballerina Build 🔧
         uses: ballerina-platform/ballerina-action/@2201.7.1
         with:
-          args: build --cloud=docker
+          args: build
           
       - name: export log
         run: docker images
