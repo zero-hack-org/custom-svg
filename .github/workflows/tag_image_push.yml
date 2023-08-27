@@ -34,7 +34,10 @@ jobs:
         uses: ballerina-platform/ballerina-action/@2201.7.1
         with:
           args: build --cloud=docker
-
+          
+      - name: export log
+        run: docker images
+        
       - name: Tag Image 🏷
         run: docker tag svg_parser:latest ${{ steps.login-ecr-public.outputs.registry }}/${{ secrets.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
 
