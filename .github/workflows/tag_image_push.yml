@@ -39,7 +39,9 @@ jobs:
         run: bal build
 
       - name: Tag Image 🏷
-        run: docker tag svg_parser:latest ${{ steps.login-ecr-public.outputs.registry }}/${{ secrets.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
+        run: docker tag svg_parser:latest ${{ steps.login-ecr-public.outputs.registry }}/${{ vars.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
 
       - name: Push Image ✨
-        run: docker push ${{ steps.login-ecr-public.outputs.registry }}/${{ secrets.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
+        run: |
+        docker push ${{ steps.login-ecr-public.outputs.registry }}/${{ vars.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:latest
+        docker push ${{ steps.login-ecr-public.outputs.registry }}/${{ vars.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
