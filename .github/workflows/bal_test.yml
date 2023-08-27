@@ -1,0 +1,45 @@
+name: Ballerina Test
+
+on:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out ✊
+        uses: actions/checkout@v3
+
+      - name: Setup Ballerina 🪤
+        uses: ballerina-platform/setup-ballerina@v1
+        with:
+        version: 2201.7.1
+
+      - name: Test Ballerina 📄
+        run: bal test
+
+  test-success:
+    if: ${{ success() }}
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Success Notify to Slack ✅
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_TITLE: Test Success✅
+          SLACK_USERNAME: announcer
+          SLACK_WEBHOOK: ${{ secrets.SLACK_HOOK_GHA_CI_URL }}
+
+  test-failed:
+    if: ${{ failure() }}
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Failed Notify to Slack ❌
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_TITLE: Test Failed❌
+          SLACK_USERNAME: announcer
+          SLACK_WEBHOOK: ${{ secrets.SLACK_HOOK_GHA_CI_URL }}
