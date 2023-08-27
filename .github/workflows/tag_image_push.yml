@@ -30,14 +30,14 @@ jobs:
           mask-password: "true"
           registry-type: public
 
-      - name: Ballerina Build 🔧
-        uses: ballerina-platform/ballerina-action/@2201.7.1
+      - name: Setup Ballerina 🪤
+        uses: ballerina-platform/setup-ballerina@v1
         with:
-          args: build
-          
-      - name: export log
-        run: docker images
-        
+          version: 2201.7.1
+
+      - name: Ballerina Build 🔧
+        run: bal build
+
       - name: Tag Image 🏷
         run: docker tag svg_parser:latest ${{ steps.login-ecr-public.outputs.registry }}/${{ secrets.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
 
