@@ -36,7 +36,7 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_COLOR: ${{ job.status }}
-          SLACK_TITLE: [${{ env.REPOSITORY_NAME }}] Test Success✅
+          SLACK_TITLE: "[${{ env.REPOSITORY_NAME }}] Test Success✅"
           SLACK_USERNAME: announcer
           SLACK_WEBHOOK: ${{ secrets.SLACK_HOOK_GHA_CI_URL }}
 
@@ -51,6 +51,6 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_COLOR: ${{ job.status }}
-          SLACK_TITLE: [${{ env.REPOSITORY_NAME }}] Test Failed❌
+          SLACK_TITLE: "[${{ env.REPOSITORY_NAME }}] Test Failed❌"
           SLACK_USERNAME: announcer
           SLACK_WEBHOOK: ${{ secrets.SLACK_HOOK_GHA_CI_URL }}
