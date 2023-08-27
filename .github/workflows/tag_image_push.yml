@@ -41,11 +41,5 @@ jobs:
       - name: Tag Image 🏷
         run: docker tag svg_parser:latest ${{ steps.login-ecr-public.outputs.registry }}/${{ secrets.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
 
-      - name: export log
-        run: docker images
-
-      - name: Push ✨
-        uses: docker/build-push-action@v4
-        with:
-          tagss: ${{ secrets.DOCKERHUB_USERNAME }}/clockbox:latest
-          push: true
+      - name: Push Image ✨
+        run: docker push ${{ steps.login-ecr-public.outputs.registry }}/${{ secrets.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
