@@ -45,5 +45,5 @@ jobs:
 
       - name: Version Tag and Push Image ✨
         run: |
-        docker tag svg_parser:latest ${{ steps.login-ecr-public.outputs.registry }}/${{ vars.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
-        docker push ${{ steps.login-ecr-public.outputs.registry }}/${{ vars.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
+          docker tag svg_parser:latest ${{ steps.login-ecr-public.outputs.registry }}/${{ vars.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
+          docker push ${{ steps.login-ecr-public.outputs.registry }}/${{ vars.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
