@@ -1,4 +1,4 @@
-name: Ballerina Test
+name: Test pull request
 
 on:
   push:
@@ -15,19 +15,27 @@ jobs:
         with:
           version: 2201.7.1
 
-      - name: Test Ballerina 📄
-        run: bal test
+      - name: Ballerina Test 🛡
+        run: bal test --test-report --code-coverage --coverage-format=xml
+
+      - name: Upload coverage reports to Codecov 📄
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./target/report/svg_parser/coverage-report.xml
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   test-success:
     if: ${{ success() }}
     runs-on: ubuntu-latest
     needs: test
     steps:
+      - run: echo "REPOSITORY_NAME=${GITHUB_REPOSITORY#${GITHUB_REPOSITORY_OWNER}/}" >> $GITHUB_ENV
       - name: Success Notify to Slack ✅
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_COLOR: ${{ job.status }}
-          SLACK_TITLE: Test Success✅
+          SLACK_TITLE: [${{ env.REPOSITORY_NAME }}] Test Success✅
           SLACK_USERNAME: announcer
           SLACK_WEBHOOK: ${{ secrets.SLACK_HOOK_GHA_CI_URL }}
 
@@ -36,10 +44,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     steps:
+      - run: echo "REPOSITORY_NAME=${GITHUB_REPOSITORY#${GITHUB_REPOSITORY_OWNER}/}" >> $GITHUB_ENV
       - name: Failed Notify to Slack ❌
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_COLOR: ${{ job.status }}
-          SLACK_TITLE: Test Failed❌
+          SLACK_TITLE: [${{ env.REPOSITORY_NAME }}] Test Failed❌
           SLACK_USERNAME: announcer
           SLACK_WEBHOOK: ${{ secrets.SLACK_HOOK_GHA_CI_URL }}
