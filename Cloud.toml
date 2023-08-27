@@ -1,2 +1,3 @@
 [container.image]
 name="svg_parser"
+tag="latest"
