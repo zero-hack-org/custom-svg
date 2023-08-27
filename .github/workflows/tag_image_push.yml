@@ -43,5 +43,5 @@ jobs:
 
       - name: Push Image ✨
         run: |
-        docker push ${{ steps.login-ecr-public.outputs.registry }}/${{ vars.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:latest
-        docker push ${{ steps.login-ecr-public.outputs.registry }}/${{ vars.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
+          docker push ${{ steps.login-ecr-public.outputs.registry }}/${{ vars.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:latest
+          docker push ${{ steps.login-ecr-public.outputs.registry }}/${{ vars.AWS_ECR_SVG_PARSER_REPOSITORY_ID }}/svg_parser:${{ env.TAG_NAME }}
